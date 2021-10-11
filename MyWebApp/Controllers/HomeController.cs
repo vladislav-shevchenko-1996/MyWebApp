@@ -32,6 +32,35 @@ namespace MyWebApp.Controllers
             return View();
         }
 
+        public IActionResult Service()
+        {
+            return View();
+        }
+        public IActionResult Portfolio()
+        {
+            return View();
+        }
+
+        public IActionResult BlogGrid()
+        {
+            return View();
+        }
+
+        public IActionResult BlogSidebar()
+        {
+            return View();
+        }
+
+        public IActionResult BlogSingle()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
