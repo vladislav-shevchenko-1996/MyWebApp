@@ -13,7 +13,7 @@ namespace MyWebApp.Services.EmailSender
         {
             //var apiKey = Environment.GetEnvironmentVariable("KOTE");
             var client = new SendGridClient("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");
-            var from = new EmailAddress(emailTo, "Example User");
+            var from = new EmailAddress(emailTo, "Вославлювач котів UwU");
             var subject = EmailMessage;
             var to = new EmailAddress(emailTo, "Example User");
             var plainTextContent = $"and easy to do anywhere, even with C# {EmailMessage}";
