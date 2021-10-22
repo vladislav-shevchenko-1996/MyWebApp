@@ -11,8 +11,8 @@ namespace MyWebApp.Services.EmailSender
     {
         public async Task SendMessage(string emailTo, string EmailMessage, string EmailBody)
         {
-            //var apiKey = Environment.GetEnvironmentVariable("KOTE");
-            var client = new SendGridClient("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");
+            var apiKey = Environment.GetEnvironmentVariable("KOTE");
+            var client = new SendGridClient(apiKey);
             var from = new EmailAddress(emailTo, "Вославлювач котів UwU");
             var subject = EmailMessage;
             var to = new EmailAddress(emailTo, "Example User");

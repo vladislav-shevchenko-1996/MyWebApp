@@ -21,7 +21,7 @@ namespace MyWebApp.Services.EmailSender
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync("smtp.sendgrid.net", 465, false);
-                await client.AuthenticateAsync("apikey", "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");
+                await client.AuthenticateAsync("apikey", "cat");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
