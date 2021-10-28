@@ -40,6 +40,9 @@ bld/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
+MyWebApp/Properties/launchSettings.json
+MyWebApp/Logs
+
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

@@ -5,6 +5,16 @@
     {
       "library": "jquery@3.6.0",
       "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "provider": "filesystem",
+      "library": "wwwroot/plugins/",
+      "destination": "wwwroot/lib/plugins/"
+    },
+    {
+      "provider": "filesystem",
+      "library": "wwwroot/images/",
+      "destination": "wwwroot/lib/images/"
     }
   ]
 }
