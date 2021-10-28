@@ -40,7 +40,7 @@ bld/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
-MyWebApp/Properties/launchSettings.json
+MyWebApp/Properties
 MyWebApp/Logs
 
 
