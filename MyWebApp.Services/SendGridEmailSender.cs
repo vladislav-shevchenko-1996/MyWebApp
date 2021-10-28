@@ -11,12 +11,13 @@ namespace MyWebApp.Services.EmailSender
 {
     public class SendGridEmailSender:IEmailSender
     {
-       
+        public string Key { get; set; }
         public async Task SendMessage(string emailTo, string EmailMessage, string EmailBody)
         {
+            
            
-            var apiKey = Environment.GetEnvironmentVariable("KOTE");
-            var client = new SendGridClient(apiKey);
+            //var apiKey = Environment.GetEnvironmentVariable("KOTE");
+            var client = new SendGridClient(Key);
             var from = new EmailAddress(emailTo, "Example User");
             var subject = EmailMessage;
             var to = new EmailAddress(emailTo, "Example User");

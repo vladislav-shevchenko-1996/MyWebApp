@@ -27,8 +27,8 @@ namespace MyWebApp
             services.AddControllersWithViews();
             services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddHttpContextAccessor();
-            //var sendGridKey = Configuration.GetSection("SendGrid:Key");
-            //Configuration.GetConnectionString("Default");
+            var sendGridKey = Configuration.GetSection("SendGrid:Key");
+            Configuration.GetConnectionString("Default");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

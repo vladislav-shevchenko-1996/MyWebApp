@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http;
 using System.Net;
+using Microsoft.Extensions.Configuration;
 
 namespace MyWebApp.Controllers
 {
@@ -18,13 +19,15 @@ namespace MyWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IEmailSender _emailSender;
+        private IConfiguration Configuration { get; }
 
         public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, 
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _logger = logger;
             _emailSender = emailSender;
             _httpContextAccessor = httpContextAccessor;
+            Configuration = configuration;
         }
 
         void LogMe()
@@ -34,14 +37,7 @@ namespace MyWebApp.Controllers
             //var curentIP = _httpContextAccessor.HttpContext.Connection.LocalIpAddress.MapToIPv4();
             var curentiP = Dns.GetHostAddresses(Dns.GetHostName())[0].ToString();
             _logger.LogInformation($"\n---Curent Url: {currentUrl}  ---Time: {DateTime.UtcNow} ---IP-address: {curentiP}");
-            //try
-            //{
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogInformation($"HomeController->Index->Exception: {ex.Message} ---IP-addres: {curentIP}");
-            //}
+            
         }
         public IActionResult Index()
         {
@@ -109,6 +105,7 @@ namespace MyWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> SendEMail([FromForm] SendEmailMessageVm vm)
         {
+            _emailSender.Key = Configuration.GetSection("SendGrid:Key").ToString();
             await _emailSender.SendMessage(vm.EmailTo, vm.EmailMessage, vm.EmailBody);
             return Json(new { success = true });
         }

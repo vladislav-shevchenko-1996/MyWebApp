@@ -7,6 +7,7 @@ namespace MyWebApp.Services.EmailSender
 {
     public class MailKitEmailSender:IEmailSender
     {
+        public string Key { get; set; }
         public async Task SendMessage(string emailTo, string EmailMessage, string EmailBody)
         {
             var myPassword = Environment.GetEnvironmentVariable("MY_PASSWORD");
