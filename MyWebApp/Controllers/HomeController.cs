@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http;
 using System.Net;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using MyWebApp.Common;
+using Microsoft.AspNetCore.Localization;
 
 namespace MyWebApp.Controllers
 {
@@ -19,25 +22,36 @@ namespace MyWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IEmailSender _emailSender;
+        private readonly SendGridConfiguration _sendGridConfig;
         private IConfiguration Configuration { get; }
 
-        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, 
-            IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, 
+            IEmailSender emailSender, 
+            IHttpContextAccessor httpContextAccessor, 
+            IOptionsMonitor<SendGridConfiguration> options )
         {
             _logger = logger;
             _emailSender = emailSender;
             _httpContextAccessor = httpContextAccessor;
-            Configuration = configuration;
+            _sendGridConfig = options.CurrentValue;
         }
 
         void LogMe()
         {
-            //var currentUrl = HttpContext.Request.GetEncodedUrl();
             var currentUrl = _httpContextAccessor.HttpContext.Request.GetEncodedUrl();
-            //var curentIP = _httpContextAccessor.HttpContext.Connection.LocalIpAddress.MapToIPv4();
             var curentiP = Dns.GetHostAddresses(Dns.GetHostName())[0].ToString();
             _logger.LogInformation($"\n---Curent Url: {currentUrl}  ---Time: {DateTime.UtcNow} ---IP-address: {curentiP}");
             
+        }
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.Now.AddYears(1) }
+                );
+            return LocalRedirect(returnUrl);
         }
         public IActionResult Index()
         {
@@ -105,7 +119,9 @@ namespace MyWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> SendEMail([FromForm] SendEmailMessageVm vm)
         {
-            _emailSender.Key = Configuration.GetSection("SendGrid:Key").ToString();
+
+            _emailSender.Key = _sendGridConfig.ApiKey;
+            _emailSender.EmailMy = _sendGridConfig.EmailFrom;
             await _emailSender.SendMessage(vm.EmailTo, vm.EmailMessage, vm.EmailBody);
             return Json(new { success = true });
         }

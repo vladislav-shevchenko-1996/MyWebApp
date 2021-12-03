@@ -5,6 +5,7 @@ using SendGrid.Helpers.Mail;
 using System;
 using System.Threading.Tasks;
 using MyWebApp.Services.EmailSender;
+using MyWebApp.Common;
 
 
 namespace MyWebApp.Services.EmailSender
@@ -12,15 +13,13 @@ namespace MyWebApp.Services.EmailSender
     public class SendGridEmailSender:IEmailSender
     {
         public string Key { get; set; }
-        public async Task SendMessage(string emailTo, string EmailMessage, string EmailBody)
+        public string EmailMy { get; set; }
+        public async Task SendMessage(string email, string EmailMessage, string EmailBody)
         {
-            
-           
-            //var apiKey = Environment.GetEnvironmentVariable("KOTE");
             var client = new SendGridClient(Key);
-            var from = new EmailAddress(emailTo, "Example User");
+            var from = new EmailAddress(EmailMy, "Example User");
             var subject = EmailMessage;
-            var to = new EmailAddress(emailTo, "Example User");
+            var to = new EmailAddress(email, "Example User");
             var plainTextContent = $"and easy to do anywhere, even with C# {EmailMessage}";
             var htmlContent = $"<strong>{EmailBody}</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
