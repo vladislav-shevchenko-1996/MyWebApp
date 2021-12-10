@@ -42,6 +42,7 @@ bld/
 Generated\ Files/
 MyWebApp/Properties
 MyWebApp/Logs
+MyWebApp/wwwroot/Files
 
 
 # MSTest test Results

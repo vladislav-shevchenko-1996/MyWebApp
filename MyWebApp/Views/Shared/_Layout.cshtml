@@ -1,7 +1,8 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization;
-@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@*@inject IHtmlLocalizer<SharedResource> Localizer*@
+@inject IViewLocalizer Localizer
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -42,7 +43,7 @@
                     </div>
                     <div class="col-lg-10 col-md-8 text-center text-lg-right text-md-right">
                         <div class="header-top-info">
-                            <a href="tel:+23-345-67890"> @SharedLocalizer["Call Us"]: <span>+23-345-67890</span></a>
+                            <a href="tel:+23-345-67890"> @Localizer["Call Us"]: <span>+23-345-67890</span></a>
                             <a href="mailto:support@gmail.com"><i class="fa fa-envelope mr-2"></i><span>support@gmail.com</span></a>
                         </div>
                     </div>
@@ -62,19 +63,19 @@
                 <div class="collapse navbar-collapse text-center" id="navbarsExample09">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"] <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"] <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["About"]</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Localizer["About"]</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown03">
                                 <li><a asp-area="" asp-controller="Home" asp-action="AboutCompany" class="dropdown-item">Our company</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Pricing">Pricing</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Service">@SharedLocalizer["Services"] </a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Portfolio">@SharedLocalizer["Portfolio"]</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Service">@Localizer["Services"] </a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Portfolio">@Localizer["Portfolio"]</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Blog"] </a>
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Localizer["Blog"] </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown05">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="BlogGrid">Blog Grid</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="BlogSidebar">Blog with Sidebar</a></li>
@@ -82,11 +83,11 @@
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="BlogSingle">Blog Single</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
                     </ul>
 
                     <form class="form-lg-inline my-2 my-md-0 ml-lg-4 text-center">
-                        <a asp-area="" asp-controller="Home" asp-action="Contact" class="btn btn-solid-border btn-round-full">@SharedLocalizer["Get a Quote"]</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Contact" class="btn btn-solid-border btn-round-full">@Localizer["Get a Quote"]</a>
                     </form>
                     <partial name="_SelectLanguage" />
                 </div>

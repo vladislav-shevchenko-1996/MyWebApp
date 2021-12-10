@@ -39,8 +39,8 @@ namespace MyWebApp
                         Name = "en-US",
                         Resources = new List<Resource>()
                         {
-                            new Resource { Key = "Header", Value = "Hello" },
-                            new Resource { Key = "Message", Value = "Welcome" }
+                            new Resource { Key = "About", Value = "Vladko" },
+                            new Resource { Key = "Blog", Value = "Blog" }
                         }
                     },
                     new Culture
@@ -48,13 +48,14 @@ namespace MyWebApp
                         Name = "uk-UA",
                         Resources = new List<Resource>()
                         {
-                            new Resource { Key = "Header", Value = "Привет" },
-                            new Resource { Key = "Message", Value = "Добро пожаловать" }
+                            new Resource { Key = "About", Value = "Про Владка" },
+                            new Resource { Key = "Blog", Value = "Блог" }
                         }
                     }
                 );
                 _db.SaveChanges();
             }
+            
             return new EFStringLocalizer(_db);
         }
     }

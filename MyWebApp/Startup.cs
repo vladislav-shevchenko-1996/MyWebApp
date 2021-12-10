@@ -30,16 +30,18 @@ namespace MyWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //string connection = "Server=(localdb)\\mssqllocaldb;Database=localizationdb;Trusted_Connection=True;";
-            //services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(connection)); services.AddTransient<IStringLocalizer, EFStringLocalizer>();
-            //services.AddSingleton<IStringLocalizerFactory>(new EFStringLocalizerFactory(connection));
-            //services.AddControllersWithViews().AddDataAnnotationsLocalization(options => {
-            //    options.DataAnnotationLocalizerProvider = (type, factory) =>
-            //    factory.Create(null);
-            //})
-            //.AddViewLocalization(); ;
-            services.AddLocalization(options=>options.ResourcesPath="Resources");
-            services.AddControllersWithViews().AddViewLocalization();
+            string connection = "Server=(localdb)\\mssqllocaldb;Database=localizationdb;Trusted_Connection=True;";
+            services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(connection)); 
+            services.AddTransient<IStringLocalizer, EFStringLocalizer>();
+            services.AddSingleton<IStringLocalizerFactory>(new EFStringLocalizerFactory(connection));
+            services.AddControllersWithViews().AddDataAnnotationsLocalization(options =>
+            {
+                options.DataAnnotationLocalizerProvider = (type, factory) =>
+                factory.Create(null);
+            })
+            .AddViewLocalization(); ;
+            //services.AddLocalization(options => options.ResourcesPath = "Resources");
+            //services.AddControllersWithViews().AddViewLocalization();
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
@@ -61,6 +63,7 @@ namespace MyWebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory )
         {
+            app.UseDeveloperExceptionPage();
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
 
             if (env.IsDevelopment())
