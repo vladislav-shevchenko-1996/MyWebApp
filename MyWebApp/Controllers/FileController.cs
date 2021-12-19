@@ -17,25 +17,9 @@ namespace MyWebApp.Controllers
         {
             _webHostEnvironment = webHostEnvironment;
         }
-        //public ActionResult Index()
-        //{
-        //    ViewBag.Title = "Home Page";
-        //    var uploadedFiles = new List<UploadFileViewModel>();
-        //    string filesDirectory = $"{_webHostEnvironment.WebRootPath}\\Files";
+        
 
-        //    foreach (var file in files)
-        //    {
-        //        var fileInfo = new FileInfo(file);
 
-        //        var uploadedFile = new UploadFileViewModel() { Name = Path.GetFileName(file) };
-                
-
-        //        uploadedFile.File.di = ("~/UploadedFiles/") + Path.GetFileName(file);
-        //        uploadedFiles.Add(uploadedFile);
-        //    }
-
-        //    return View(uploadedFiles);
-        //}
         [HttpPost]
         public async Task<IActionResult> Upload(UploadFileViewModel vm)
         {

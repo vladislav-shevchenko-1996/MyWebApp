@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Localization;
 using MyWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using FluentValidation.AspNetCore;
 
 namespace MyWebApp
 {
@@ -30,18 +31,19 @@ namespace MyWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = "Server=(localdb)\\mssqllocaldb;Database=localizationdb;Trusted_Connection=True;";
-            services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(connection)); 
-            services.AddTransient<IStringLocalizer, EFStringLocalizer>();
-            services.AddSingleton<IStringLocalizerFactory>(new EFStringLocalizerFactory(connection));
-            services.AddControllersWithViews().AddDataAnnotationsLocalization(options =>
-            {
-                options.DataAnnotationLocalizerProvider = (type, factory) =>
-                factory.Create(null);
-            })
-            .AddViewLocalization(); ;
-            //services.AddLocalization(options => options.ResourcesPath = "Resources");
-            //services.AddControllersWithViews().AddViewLocalization();
+            //string connection = "Server=(localdb)\\mssqllocaldb;Database=localizationdb;Trusted_Connection=True;";
+            //services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(connection)); 
+            //services.AddTransient<IStringLocalizer, EFStringLocalizer>();
+            //services.AddSingleton<IStringLocalizerFactory>(new EFStringLocalizerFactory(connection));
+            //services.AddControllersWithViews().AddDataAnnotationsLocalization(options =>
+            //{
+            //    options.DataAnnotationLocalizerProvider = (type, factory) =>
+            //    factory.Create(null);
+            //})
+            //.AddViewLocalization(); ;
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddControllersWithViews().AddViewLocalization()
+                .AddFluentValidation(fv=>fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]

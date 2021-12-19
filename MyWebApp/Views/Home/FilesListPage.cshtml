@@ -1,5 +1,10 @@
-﻿
+﻿@using MyWebApp.Models.File
+@model FilesList
+<h3>Download files</h3>
 @{
-    ViewData["Title"] = "Files List";
+    foreach (var item in Model.FileList)
+    {
+        <a href="@Url.Action("Download", new {file = item.fileDirectory})" class="not-filled recent">@item.Name</a>
+        <br>
+    }
 }
-

@@ -29,6 +29,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12">
+                    @Html.ValidationSummary(false,null,new {@class="text-danger" })
                     <form id="contact-form" class="contact__form" method="post" asp-area="" asp-controller="Home" asp-action="SendEmail">
                         <!-- form message -->
                         <div class="row">
@@ -42,10 +43,10 @@
                         <span class="text-color">Send a message</span>
                         <h3 class="text-md mb-4">Contact Form</h3>
                         <div class="form-group">
-                            <input asp-for="EmailMessage" class="form-control" placeholder="Your Name">
+                            <input type="text" asp-for="EmailMessage" class="form-control" placeholder="Your Name">
                         </div>
                         <div class="form-group">
-                            <input asp-for="EmailTo" class="form-control" placeholder="Email Address">
+                            <input type="text" asp-for="EmailTo" class="form-control" placeholder="Email Address">
                         </div>
                         <div class="form-group-2 mb-4">
                             <textarea asp-for="EmailBody" class="form-control" rows="4" placeholder="Your Message"></textarea>

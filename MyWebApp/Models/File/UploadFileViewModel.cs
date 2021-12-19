@@ -10,6 +10,7 @@ namespace MyWebApp.Models.File
     {
         public string Name { get; set; }
         public IFormFile File { get; set; }
-        //public IFormFileCollection MyProperty { get; set; }
+        public string fileDirectory { get; set; }
+
     }
 }
